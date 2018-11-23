@@ -19,55 +19,39 @@ Search::Search(int wordLen, std::vector<Operation> &ops) : _searchSpace(1u << (w
 
 int Search::find(unsigned int from, unsigned int to) {
 
-	std::vector<std::pair<unsigned int, int>> costs;
-	costs.resize(_searchSpace);
+	typedef std::pair<int, unsigned int> costVal;
 
-	std::list<std::pair<unsigned int, int>*> toSearch; //Value, cost
+	std::vector<int> costs(_searchSpace, -1);
+	std::priority_queue<costVal, std::vector<costVal>,  std::greater<costVal>> toSearch; //Value, cost
 
-	for(int i = 0; i < costs.size(); ++i) {
-		costs[i] = {i, i == from ? 0 : -1};
-		toSearch.emplace_back(&costs[i]);
-	}
-
-	std::pair<unsigned int, int>* target = &costs[to];
-
-	toSearch.sort(comparator{});
+	costs[from] = 0;
+	toSearch.push({0, from});
 
 	while(!toSearch.empty()) {
 
-		auto& p = toSearch.front();
+		auto p = toSearch.top();
 
-		if(p->second == -1) {
-			return costs[to].second;
-		}
+		for (auto& op : _ops) {
 
-		if(target->second == -1 || p->second <= target->second) {
-			for (auto &op : _ops) {
-				unsigned int val = op.apply(p->first);
+			int cost = p.first + op.cost();
 
-				int cost = p->second + op.cost();
+			unsigned int res = op.apply(p.second);
 
-				if (cost < costs[val].second || costs[val].second == -1) {
-					auto *pair = &costs[val];
-					toSearch.remove(pair);
-
-					pair->second = cost;
-
-					auto insertpoint = std::find_if(toSearch.begin(), toSearch.end(),
-						[pair](std::pair<unsigned int, int> *p) {
-						    if (p->second == -1)
-						        return true;
-						    return pair->second < p->second;
-						});
-					toSearch.insert(insertpoint, pair);
-				}
+			if(res == to) {
+				return cost;
 			}
+
+			if(costs[res] == -1 || cost <= costs[res]) {
+				costs[res] = cost;
+				toSearch.push({cost, res});
+			}
+
 		}
 
-		toSearch.erase(toSearch.begin());
+		toSearch.pop();
 
 	}
 
-	return costs[to].second;
+	return costs[to];
 
 }
