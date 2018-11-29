@@ -9,7 +9,7 @@
 
 int main() {
 
-	std::ifstream inf("test.txt");
+	std::ifstream inf("imperfectgps.txt");
 	std::istream& in = inf;
 
 	std::vector<std::pair<ray, int>> path;
