@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(Kattis9)
+project(alandr-kattis)
 
 set(CMAKE_CXX_STANDARD 17)
 
