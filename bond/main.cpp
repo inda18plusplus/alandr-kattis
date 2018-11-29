@@ -10,9 +10,9 @@ int numBonds;
 typedef double bond[20];
 bond bonds[20];
 
-std::map<std::vector<bool>, double> memory;
+std::map<unsigned int, double> memory;
 
-double solve(const std::vector<bool>& chosen, int operation) {
+double solve(unsigned int chosen, int operation) {
 
 	if(operation >= numBonds)
 		return 1.0;
@@ -23,9 +23,9 @@ double solve(const std::vector<bool>& chosen, int operation) {
 	double ret = 0.0;
 
 	for (int i = 0; i < numBonds; ++i) {
-		if(!chosen[i]) {
+		if(!(chosen & (1 << i))) {
 			auto tmp = chosen;
-			tmp[i] = true;
+			tmp |= (1 << i);
 			double answer = bonds[i][operation] * solve(tmp, operation + 1);
 			if(answer > ret)
 				ret = answer;
@@ -39,8 +39,7 @@ double solve(const std::vector<bool>& chosen, int operation) {
 
 double solve() {
 
-	std::vector<bool> in(numBonds, false);
-	return solve(in, 0);
+	return solve(0, 0);
 
 }
 
