@@ -36,6 +36,9 @@ void solve() {
 			auto path = mem[i];
 			path[j]++;
 
+			if(duplicates.count(i))
+				duplicates.insert(result);
+
 			if(mem.count(result)) {
 				auto oldPath = mem[result];
 				if(path != oldPath)
@@ -86,7 +89,6 @@ int main() {
 	std::cin >> numOrders;
 	orders.resize(numOrders);
 
-	int c = 0;
 	for(auto& i : orders) {
 		std::cin >> i;
 	}
