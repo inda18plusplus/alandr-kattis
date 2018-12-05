@@ -1,36 +1,21 @@
 //
-// Created by lunar on 04/12/18.
+// Created by lunar on 05/12/18.
 //
 
 #ifndef ALANDR_KATTIS_TREE_HPP
 #define ALANDR_KATTIS_TREE_HPP
 
+#include <vector>
 
 class Tree {
 
-	struct Node {
-		Node(int levels);
-
-		int calcSum();
-
-		int _value = 0;
-		int _size = 0;
-
-		Node* _lhs = nullptr;
-		Node* _rhs = nullptr;
-
-		int& operator[](int index);
-	};
-
-	Node* _root;
-	int _size;
+	std::vector<int> _arr;
 
 public:
 	Tree(int size);
 
-	int& operator[](int index);
-
-	int getUpTo(int index);
+	void increment(int index, int value);
+	int getTo(int index);
 
 };
 

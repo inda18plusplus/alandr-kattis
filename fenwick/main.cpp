@@ -9,8 +9,6 @@
 
 int main() {
 
-	freopen("fenwick.txt", "r", stdin);
-
 	int size, operations;
 	scanf("%d %d", &size, &operations);
 
@@ -23,15 +21,15 @@ int main() {
 		if(c == '+') {
 			int index, value;
 			scanf("%d %d", &index, &value);
-			t[index] = value;
+			t.increment(index + 1, value);
 		} else {
-			int index;
-			scanf("%d", &index);
+			int firstN;
+			scanf("%d", &firstN);
 
-			if(index == 0) {
+			if(firstN == 0) {
 				printf("0\n");
 			} else {
-				printf("%d\n", t.getUpTo(index - 1));
+				printf("%d\n", t.getTo(firstN));
 			}
 
 		}
