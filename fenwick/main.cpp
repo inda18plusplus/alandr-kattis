@@ -21,17 +21,12 @@ int main() {
 		if(c == '+') {
 			int index, value;
 			scanf("%d %d", &index, &value);
-			t.increment(index + 1, value);
+			t.increment(index, value);
 		} else {
 			int firstN;
 			scanf("%d", &firstN);
 
-			if(firstN == 0) {
-				printf("0\n");
-			} else {
-				printf("%d\n", t.getTo(firstN));
-			}
-
+			printf("%lld\n", t.getTo(firstN));
 		}
 
 	}

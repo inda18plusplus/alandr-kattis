@@ -9,13 +9,13 @@
 
 class Tree {
 
-	std::vector<int> _arr;
+	std::vector<long long> _arr;
 
 public:
 	Tree(int size);
 
-	void increment(int index, int value);
-	int getTo(int index);
+	void increment(int index, long long value);
+	long long getTo(int firstN);
 
 };
 
