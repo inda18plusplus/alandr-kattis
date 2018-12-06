@@ -1,7 +1,7 @@
 //
 // Created by lunar on 28/11/18.
 //
-#include <iostream>
+#include <cstdio>
 #include <stack>
 #include <queue>
 
@@ -11,7 +11,7 @@ int main() {
 
 	int operations;
 
-	while(std::cin >> operations, !std::cin.eof()) {
+	while(scanf(" %d", &operations) != EOF) {
 
 		bool canStack = true;
 		bool canQueue = true;
@@ -23,8 +23,7 @@ int main() {
 
 		for (int i = 0; i < operations; ++i) {
 			int operation, value;
-
-			std::cin >> operation >> value;
+			scanf(" %d %d", &operation, &value);
 
 			if(operation == 1) {
 				stack.push(value);
@@ -39,7 +38,7 @@ int main() {
 					break;
 				}
 
-				char out = stack.top();
+				int out = stack.top();
 				stack.pop();
 
 				if(out != value)
@@ -63,17 +62,17 @@ int main() {
 		int sum = canStack + canQueue + canPrioQ;
 
 		if(sum == 0) {
-			std::cout << "impossible\n";
+			printf("impossible\n");
 		} else if(sum > 1) {
-			std::cout << "not sure\n";
+			printf("not sure\n");
 		} else {
 
 			if(canStack)
-				std::cout << "stack\n";
+				printf("stack\n");
 			if(canQueue)
-				std::cout << "queue\n";
+				printf("queue\n");
 			if(canPrioQ)
-				std::cout << "priority queue\n";
+				printf("priority queue\n");
 
 		}
 
