@@ -12,7 +12,7 @@ int main() {
 	int size, operations;
 	scanf("%d %d", &size, &operations);
 
-	Tree t(size);
+	Tree<long long, 0> t(size);
 
 	for (int i = 0; i < operations; ++i) {
 		char c;
@@ -21,12 +21,15 @@ int main() {
 		if(c == '+') {
 			int index, value;
 			scanf("%d %d", &index, &value);
-			t.increment(index, value);
+			t.set(index, t.get(index) + value);
 		} else {
 			int firstN;
 			scanf("%d", &firstN);
 
-			printf("%lld\n", t.getTo(firstN));
+			if(firstN == 0)
+				printf("0\n");
+			else
+				printf("%lld\n", t.valueTo(firstN - 1));
 		}
 
 	}
