@@ -7,8 +7,6 @@
 
 int main() {
 
-	freopen("guessthedatastructure.txt", "r", stdin);
-
 	int operations;
 
 	while(scanf(" %d", &operations) != EOF) {
@@ -35,7 +33,7 @@ int main() {
 					canStack = false;
 					canQueue = false;
 					canPrioQ = false;
-					break;
+					continue;
 				}
 
 				int out = stack.top();
