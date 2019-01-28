@@ -18,7 +18,7 @@ T ceilPow2(T in) {
 	return (T)pow(2, exponent);
 }
 
-template<typename T, T _empty, class Aggr = std::plus<T>()>
+template<typename T, T _empty, class Aggr = std::plus<T>>
 class Tree {
 public:
 	typedef typename std::vector<T>::size_type index_type;
