@@ -2,9 +2,9 @@
 #include <vector>
 #include <iostream>
 
-typedef unsigned long long ull;
+typedef unsigned __int128 ull;
 
-const ull p = 53;
+const ull p = 257;
 const ull mod = 1'000'000'000 + 7;
 
 std::string input;
@@ -13,7 +13,7 @@ std::vector<ull> pows;
 
 ull hash(size_t from, size_t to) {
 
-	return hashes[to] - hashes[from - 1] * pows[to - from + 1] % mod;
+	return (hashes[to] - hashes[from] * pows[to - from]) % mod;
 
 }
 
@@ -42,7 +42,7 @@ int main() {
 	for (int i = 0; i < numQueries; ++i) {
 		size_t from, to;
 		scanf("%lu %lu", &from, &to);
-		printf("%llu\n", hash(from + 1, to));
+		printf("%llu\n", hash(from, to));
 	}
 
 }
